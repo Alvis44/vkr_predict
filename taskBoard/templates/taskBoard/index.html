@@ -1,0 +1,78 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<h3>Список задач</h3>
+
+<div>
+    <table class="list_task">
+        <tr>
+            <td>Фильтры</td>
+            <form action="{% url 'taskBoard:index' %}" method="post">
+                {% csrf_token %}
+                <td>{{ form.title }}</td>
+                <td>{{ form.create_by }}</td>
+                <td>{{ form.status }}</td>
+                <td><button type="submit">
+                        <img src="{% static 'img/search.png' %}"></button>
+            </form>
+            <button type="submit">
+                <a href="{% url 'taskBoard:index' %}">
+                    <img src="{% static 'img/cancelSearch.png' %}"></a></button>
+            </td>
+            <td></td>
+
+            <td>
+            </td>
+        </tr>
+        <tr>
+            <th>ID</th>
+            <th>Задача</th>
+            <th>Автор</th>
+            <th>Статус</th>
+            <th>Дата создания</th>
+            <th>Дата закрытия</th>
+            <th>Описание</th>
+        </tr>
+        {% for task in task_list %}
+        <tr>
+            <td>
+                {{ task.id }}
+            </td>
+            <td>
+                <a href="{% url 'taskBoard:detail' task.id %}">
+                    {% if task.status == "CLOSED" %}
+                    {{ task.title }}
+                    {% else %}
+                    {{ task.title }}
+                    {% endif %}
+                </a>
+            </td>
+            <td>
+                {{ task.create_by }}
+            </td>
+            <td>
+                {{ task.view_status }}
+            </td>
+            <td>
+                {{ task.date_create }}
+            </td>
+            <td>
+                {{ task.date_close_view }}
+            </td>
+            <td title="{{ task.description }}">
+                {{ task.description_view }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% if perms.taskBoard.can_add_task %}
+    <form action="{% url 'taskBoard:add' %}" method="post">
+        {% csrf_token %}
+        <div>
+            <input type="submit" value="Добавить">
+        </div>
+    </form>
+    {% endif%}
+</div>
+{% endblock %}

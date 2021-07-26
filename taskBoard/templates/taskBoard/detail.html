@@ -1,0 +1,41 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <div class="main">
+        <div class="field">
+            <label for="id">ID</label>
+            <text id="id">{{ task.id }}</text>
+        </div>
+        <div class="field">
+            <label for="date_create">Дата создания</label>
+            <text id="date_create">{{ task.date_create }}</text>
+        </div>
+        <div class="field">
+            <label for="date_close">Дата закрытия</label>
+            <text id="date_close">{{ task.date_close_view }}</text>
+        </div>
+        <div class="field">
+            <label for="user_create">Автор</label>
+            <text id="user_create">{{ task.create_by }}</text>
+        </div>
+        <div class="field">
+            <label for="title">Заголовок</label>
+            {{ form.title }}
+        </div>
+        <div class="field">
+            <label for="description">Описание</label>
+            {{ form.description }}
+        </div>
+        <div class="field">
+            <label for="status">Статус</label>
+            {{ form.status }}
+        </div>
+        <div class="btn">
+            <button type="submit" formaction="{% url 'taskBoard:taskSave' task.id %}">Сохранить</button>
+            <button type="submit" formaction="{% url 'taskBoard:delete' task.id %}">Удалить</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
