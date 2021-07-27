@@ -36,7 +36,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-=09!w#3dylt57v
 #DEBUG = True
 DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
 
-ALLOWED_HOSTS = ['<your app URL without the https:// prefix>.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['https://task-list-alvis.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
