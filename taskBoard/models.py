@@ -20,9 +20,9 @@ class Task(models.Model):
     ]
 
     class Meta:
-        permissions = (("can_add_task", "Добавление задачи"),
+        permissions = [("can_add_task", "Добавление задачи"),
                        ("can_delete_task", "Удаление задачи"),
-                       ("can_edit_task", "Изменение задачи"))
+                       ("can_edit_task", "Изменение задачи")]
 
     title = models.CharField('Заголовок', max_length=150)
     description = models.TextField('Описание', blank=True)
