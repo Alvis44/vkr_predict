@@ -7,7 +7,7 @@ from django.views import generic
 from django.views.generic.edit import CreateView, DeleteView, FormView, UpdateView
 from datetime import datetime
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.views.generic.list import ListView
 from taskBoard.forms import TaskCreateForm
 from django.contrib.auth.models import User, UserManager
@@ -58,16 +58,17 @@ class DetailEdit(LoginRequiredMixin, UpdateView):
     success_url = '/taskBoard/'
 
 
-class TaskCreate(LoginRequiredMixin, CreateView):
+class TaskCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Task
     fields = ['title', 'description']
     template_name = 'taskBoard/add.html'
     success_url = '/taskBoard/'
+    permission_required = 'task.can_add_task'
 
-
-class TaskDelete(LoginRequiredMixin, DeleteView):
+class TaskDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Task
     success_url = '/taskBoard/'
+    permission_required = 'task.can_delete_task'
 
 
 @permission_required('taskBoard.can_edit_task')
