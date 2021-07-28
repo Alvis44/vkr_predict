@@ -8,7 +8,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
-from datetime import datetime
 from django.http import HttpRequest
 
 
@@ -23,7 +22,7 @@ class Task(models.Model):
     title = models.CharField('Заголовок', max_length=150)
     description = models.TextField('Описание', blank=True)
     status = models.CharField('Статус', choices=LIST_VALUE, max_length=20, default='NEW')
-    date_create = models.DateTimeField('Дата создания', default=datetime.now())
+    date_create = models.DateTimeField('Дата создания')
     date_close = models.DateTimeField('Дата закрытия', blank=True, null=True)
     create_by = models.ForeignKey(User, on_delete=models.PROTECT, verbose_name='Автор')
 
