@@ -33,8 +33,12 @@
             {{ form.status }}
         </div>
         <div class="btn">
+            {% if perms.taskBoard.can_delete_task %}
             <button type="submit" formaction="{% url 'taskBoard:taskSave' task.id %}">Сохранить</button>
+            {% endif %}
+            {% if perms.taskBoard.can_edit_task %}
             <button type="submit" formaction="{% url 'taskBoard:delete' task.id %}">Удалить</button>
+            {% endif %}
         </div>
     </div>
 </form>

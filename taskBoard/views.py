@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic.list import ListView
 from taskBoard.forms import TaskCreateForm
 from django.contrib.auth.models import User, UserManager
+from django.contrib.auth.decorators import permission_required
 
 from .models import Task
 from taskBoard import models
@@ -69,7 +70,8 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     success_url = '/taskBoard/'
 
 
-@ login_required(redirect_field_name='taskBoard')
+@permission_required('taskBoard.can_edit_task')
+@login_required(redirect_field_name='taskBoard')
 def detail(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
     task.description = request.POST['description']
@@ -83,7 +85,8 @@ def detail(request, task_id):
     return HttpResponseRedirect(reverse('taskBoard:index'))
 
 
-@ login_required(redirect_field_name='taskBoard')
+@permission_required('taskBoard.can_add_task')
+@login_required(redirect_field_name='taskBoard')
 def createTask(request):
     task = Task()
     task.description = request.POST['description']
