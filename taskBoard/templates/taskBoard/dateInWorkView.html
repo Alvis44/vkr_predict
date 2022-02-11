@@ -5,7 +5,7 @@
     {% csrf_token %}
     <div class="main">
         Тест
-        {% for item in TaskWorkingHours %}
+        {% for item in TaskWorkingHours_list %}
         Задача: {{ item.taskInWork }}
         {% endfor %}
     </div>
