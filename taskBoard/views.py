@@ -74,15 +74,7 @@ class TaskDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
 @login_required(redirect_field_name='taskBoard')
 def detail(request, task_id):
     task = get_object_or_404(Task, pk=task_id)
-    task.description = request.POST['description']
-    task.title = request.POST['title']
-    if not task.status == request.POST['status'] and request.POST['status'] == 'CLOSED':
-        task.date_close = datetime.now()
-    elif not task.status == request.POST['status'] and task.status == 'CLOSED':
-        task.date_close = None
-    task.status = request.POST['status']
-    task.save()
-
+    
     if  not task.status == request.POST['status'] and request.POST['status'] == 'INWORK':
         taskInWork = TaskWorkingHours()
         taskInWork.taskInWork = task
@@ -92,6 +84,15 @@ def detail(request, task_id):
         taskInWork = get_object_or_404(TaskWorkingHours, taskInWork=task)
         taskInWork.date_to = datetime.now() 
         taskInWork.save()
+    
+    task.description = request.POST['description']
+    task.title = request.POST['title']
+    if not task.status == request.POST['status'] and request.POST['status'] == 'CLOSED':
+        task.date_close = datetime.now()
+    elif not task.status == request.POST['status'] and task.status == 'CLOSED':
+        task.date_close = None
+    task.status = request.POST['status']
+    task.save()
 
     return HttpResponseRedirect(reverse('taskBoard:index'))
 
