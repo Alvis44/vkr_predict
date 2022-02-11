@@ -1,7 +1,6 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-    {% csrf_token %}
     <h1>Тест</h1>
         {% for item in TaskWorkingHours_list %}
         Задача: {{ item.taskInWork }}
