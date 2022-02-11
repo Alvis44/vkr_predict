@@ -59,7 +59,7 @@ class DetailEdit(LoginRequiredMixin, UpdateView):
 
     @staticmethod
     def all_dateInWork():
-        return TaskWorkingHours.objects.filter(task=Task)
+        return TaskWorkingHours.objects.all()
 
 
 class TaskCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
