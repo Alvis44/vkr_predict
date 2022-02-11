@@ -4,8 +4,9 @@
 <form action="{% url 'taskBoard:TaskWorkingHours' %}" method="post">
     {% csrf_token %}
     <div class="main">
+        Тест
         {% for item in TaskWorkingHours %}
-        {{ item.taskInWork }}
+        Задача: {{ item.taskInWork }}
         {% endfor %}
     </div>
 </form>
