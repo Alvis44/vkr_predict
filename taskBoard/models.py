@@ -58,6 +58,6 @@ class Task(models.Model):
 
 class TaskWorkingHours(models.Model):
 
-    task = models.ForeignKey(Task, on_delete=models.PROTECT, verbose_name='Задача')
+    taskInWork = models.ForeignKey(Task, on_delete=models.PROTECT, verbose_name='Задача')
     date_from = models.DateTimeField('Дата с')
     date_to = models.DateTimeField('Дата по', blank=True, null=True)

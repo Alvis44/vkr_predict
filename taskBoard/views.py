@@ -93,7 +93,7 @@ def detail(request, task_id):
         taskInWork.date_from = datetime.now()
         taskInWork.save()
     elif not task.status == request.POST['status'] and (request.POST['status'] == 'PAUSE' or request.POST['status'] == 'CLOSED'):
-        taskInWork = get_object_or_404(TaskWorkingHours, task=task)
+        taskInWork = get_object_or_404(TaskWorkingHours, taskInWork=task)
         taskInWork.date_to = datetime.now() 
         taskInWork.save()
 
