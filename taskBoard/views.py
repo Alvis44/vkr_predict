@@ -45,7 +45,7 @@ class IndexView(LoginRequiredMixin, ListView, FormView):
                     status__icontains=self.request.POST['status'])
             return list_filter
         else:
-            return Task.objects.all()
+            return TaskWorkingHours.objects.all()
 
     def post(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
