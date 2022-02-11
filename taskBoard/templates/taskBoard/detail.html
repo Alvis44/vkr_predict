@@ -40,9 +40,11 @@
             <button type="submit" formaction="{% url 'taskBoard:delete' task.id %}">Удалить</button>
             {% endif %}
         </div>
-       <div>{% for item in dateInWork %}
-             {{ item.date_from }}
-            {% endfor %}</div>
+       <div> <ul>
+        {% for item in taskInWork %}
+        <li>Задача: {{ item.taskInWork }} с {{ item.date_from }} по {{ item.date_to }}</li>
+        {% endfor %}
+    </ul></div>
     </div>
 </form>
 {% endblock %}

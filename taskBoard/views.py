@@ -57,6 +57,11 @@ class DetailEdit(LoginRequiredMixin, UpdateView):
     template_name = 'taskBoard/detail.html'
     success_url = '/taskBoard/'
 
+    def get_context_data(self, **kwargs):
+        context = super(DetailEdit).get_context_data(**kwargs)
+        context['taskInWork'] = TaskWorkingHours.objects.all()
+        return context
+
 class TaskCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Task
     fields = ['title', 'description']
@@ -81,7 +86,7 @@ def detail(request, task_id):
         taskInWork.date_from = datetime.now()
         taskInWork.save()
     elif not task.status == request.POST['status'] and (request.POST['status'] == 'PAUSE' or request.POST['status'] == 'CLOSED'):
-        taskInWork = get_object_or_404(TaskWorkingHours, taskInWork=task)
+        taskInWork = get_object_or_404(TaskWorkingHours, taskInWork=task, date_to=None)
         taskInWork.date_to = datetime.now() 
         taskInWork.save()
     
