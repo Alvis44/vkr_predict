@@ -13,7 +13,7 @@ from taskBoard.forms import TaskCreateForm
 from django.contrib.auth.models import User, UserManager
 from django.contrib.auth.decorators import permission_required
 
-from .models import Task
+from .models import Task, TaskWorkingHours
 from taskBoard import models
 from taskBoard.forms import TaskCreateForm
 
@@ -57,6 +57,10 @@ class DetailEdit(LoginRequiredMixin, UpdateView):
     template_name = 'taskBoard/detail.html'
     success_url = '/taskBoard/'
 
+    @staticmethod
+    def all_dateInWork():
+        return TaskWorkingHours.objects.filter(task=Task)
+
 
 class TaskCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Task
@@ -83,6 +87,16 @@ def detail(request, task_id):
         task.date_close = None
     task.status = request.POST['status']
     task.save()
+
+    if  not task.status == request.POST['status'] and request.POST['status'] == 'INWORK':
+        taskInWork = TaskWorkingHours()
+        taskInWork.date_from = datetime.now()
+        taskInWork.save()
+    elif not task.status == request.POST['status'] and (request.POST['status'] == 'PAUSE' or request.POST['status'] == 'CLOSED'):
+        taskInWork = get_object_or_404(TaskWorkingHours, task=task)
+        taskInWork.date_to = datetime.now() 
+        taskInWork.save()
+
     return HttpResponseRedirect(reverse('taskBoard:index'))
 
 

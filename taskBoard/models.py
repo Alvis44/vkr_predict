@@ -16,6 +16,7 @@ class Task(models.Model):
     LIST_VALUE = [
         ('NEW', 'Новая'),
         ('INWORK', 'В работе'),
+        ('PAUSE', 'Отложена'),
         ('CLOSED', 'Закрыта')
     ]
 
@@ -54,3 +55,9 @@ class Task(models.Model):
             return '---'
         else:
             return self.date_close
+
+class TaskWorkingHours(models.Model):
+
+    task = models.ForeignKey(Task, on_delete=models.PROTECT, verbose_name='Задача')
+    date_from = models.DateTimeField('Дата с')
+    date_to = models.DateTimeField('Дата по', blank=True, null=True)
