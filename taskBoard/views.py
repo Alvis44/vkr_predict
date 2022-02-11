@@ -109,5 +109,5 @@ def createTask(request):
     return HttpResponseRedirect(reverse('taskBoard:index'))
 
 class TaskWorkingHoursView(LoginRequiredMixin, ListView):
-    model = TaskWorkingHours
+    model = Task
     template_name = 'taskBoard/dateInWorkView.html'
