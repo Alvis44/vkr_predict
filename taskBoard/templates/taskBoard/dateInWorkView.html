@@ -3,7 +3,7 @@
 {% block content %}
     <h1>Тест</h1>
     <ul>
-        {% for item in Task_list %}
+        {% for item in object_list %}
         <li>Задача: {{ item.title }}</li>
         {% endfor %}
     </ul>
