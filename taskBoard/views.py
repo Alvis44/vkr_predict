@@ -59,7 +59,7 @@ class DetailEdit(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(DetailEdit, self).get_context_data(**kwargs)
-        context['dateInWork'] = TaskWorkingHours.objects.all()
+        context['dateInWork'] = Task.objects.all()
         return context
 
 class TaskCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
