@@ -45,7 +45,7 @@ class IndexView(LoginRequiredMixin, ListView, FormView):
                     status__icontains=self.request.POST['status'])
             return list_filter
         else:
-            return TaskWorkingHours.objects.all()
+            return Task.objects.all()
 
     def post(self, request, *args, **kwargs):
         return super().get(request, *args, **kwargs)
@@ -59,7 +59,7 @@ class DetailEdit(LoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(DetailEdit, self).get_context_data(**kwargs)
-        context['dateInWork'] = Task.objects.all()
+        context['dateInWork'] = TaskWorkingHours.objects.all()
         return context
 
 class TaskCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
