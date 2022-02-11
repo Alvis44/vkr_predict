@@ -85,6 +85,7 @@ def detail(request, task_id):
 
     if  not task.status == request.POST['status'] and request.POST['status'] == 'INWORK':
         taskInWork = TaskWorkingHours()
+        taskInWork.taskInWork = task
         taskInWork.date_from = datetime.now()
         taskInWork.save()
     elif not task.status == request.POST['status'] and (request.POST['status'] == 'PAUSE' or request.POST['status'] == 'CLOSED'):
