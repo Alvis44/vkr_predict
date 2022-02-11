@@ -57,10 +57,10 @@ class DetailEdit(LoginRequiredMixin, UpdateView):
     template_name = 'taskBoard/detail.html'
     success_url = '/taskBoard/'
 
-    def get_context_data(self, **kwargs):
-        context = super(DetailEdit, self).get_context_data(**kwargs)
-        context['taskInWork'] = TaskWorkingHours.objects.filter(taskInWork = Task)
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super(DetailEdit, self).get_context_data(**kwargs)
+    #     context['taskInWork'] = TaskWorkingHours.objects.filter(taskInWork = Task)
+    #     return context
 
 class TaskCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Task
