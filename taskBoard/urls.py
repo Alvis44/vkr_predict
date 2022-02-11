@@ -10,4 +10,5 @@ urlpatterns = [
     path('add', views.TaskCreate.as_view(), name='add'),
     path('CreateTask', views.createTask, name='createTask'),
     path('<int:pk>/Delete', views.TaskDelete.as_view(), name='delete'),
+    path('TaskWorkingHours', views.TaskWorkingHoursView.as_view(), name='TaskWorkingHours'),
 ]

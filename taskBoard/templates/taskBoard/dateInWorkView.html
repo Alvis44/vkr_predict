@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<form action="{% url 'taskBoard:TaskWorkingHours' %}" method="post">
+    {% csrf_token %}
+    <div class="main">
+        {% for item in TaskWorkingHours %}
+        {{ item.taskInWork }}
+        {% endfor %}
+    </div>
+</form>
+{% endblock %}
