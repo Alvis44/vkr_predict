@@ -4,7 +4,11 @@
     <h1>Тест</h1>
     <ul>
         {% for item in object_list %}
-        <li>Задача: {{ item.taskInWork }} с {{ item.date_from }} по {{ item.date_to }}</li>
+        <li>Задача: {{ item.taskInWork }} с {{ item.date_from }} по {{ item.date_to }} | {{ item.timeWorked }}</li>
         {% endfor %}
     </ul>
+
+    {{ filter.qs.taskInWork }}<br />
+    {{ filter.qs.date_from }}<br />
+    {{ filter.qs.date_to }}<br />
 {% endblock %}

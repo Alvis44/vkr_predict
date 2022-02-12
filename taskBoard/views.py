@@ -13,6 +13,8 @@ from taskBoard.forms import TaskCreateForm
 from django.contrib.auth.models import User, UserManager
 from django.contrib.auth.decorators import permission_required
 
+import django_filters
+
 from .models import Task, TaskWorkingHours
 from taskBoard import models
 from taskBoard.forms import TaskCreateForm
@@ -57,11 +59,6 @@ class DetailEdit(LoginRequiredMixin, UpdateView):
     template_name = 'taskBoard/detail.html'
     success_url = '/taskBoard/'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super(DetailEdit, self).get_context_data(**kwargs)
-    #     context['taskInWork'] = TaskWorkingHours.objects.filter(taskInWork = Task)
-    #     return context
-
 class TaskCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     model = Task
     fields = ['title', 'description']
@@ -88,6 +85,7 @@ def detail(request, task_id):
     elif not task.status == request.POST['status'] and (request.POST['status'] == 'PAUSE' or request.POST['status'] == 'CLOSED'):
         taskInWork = get_object_or_404(TaskWorkingHours, taskInWork=task, date_to=None)
         taskInWork.date_to = datetime.now() 
+        taskInWork.timeWorked = taskInWork.date_to - taskInWork.date_from
         taskInWork.save()
     
     task.description = request.POST['description']
@@ -117,3 +115,8 @@ def createTask(request):
 class TaskWorkingHoursView(LoginRequiredMixin, ListView):
     model = TaskWorkingHours
     template_name = 'taskBoard/dateInWorkView.html'
+
+class TaskWorkingHoursFilter(django_filters.FilterSe):
+    class Meta:
+        model = TaskWorkingHours
+        fields = ['taskInWork', 'data_from', 'date_to']
