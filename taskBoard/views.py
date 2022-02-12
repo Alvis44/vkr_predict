@@ -116,7 +116,7 @@ class TaskWorkingHoursView(LoginRequiredMixin, ListView):
     model = TaskWorkingHours
     template_name = 'taskBoard/dateInWorkView.html'
 
-class TaskWorkingHoursFilter(django_filters.FilterSe):
-    class Meta:
-        model = TaskWorkingHours
-        fields = ['taskInWork', 'data_from', 'date_to']
+# class TaskWorkingHoursFilter(django_filters.FilterSe):
+#     class Meta:
+#         model = TaskWorkingHours
+#         fields = ['taskInWork', 'data_from', 'date_to']
