@@ -85,7 +85,8 @@ def detail(request, task_id):
     elif not task.status == request.POST['status'] and (request.POST['status'] == 'PAUSE' or request.POST['status'] == 'CLOSED'):
         taskInWork = get_object_or_404(TaskWorkingHours, taskInWork=task, date_to=None)
         taskInWork.date_to = datetime.now() 
-        # taskInWork.timeWorked = taskInWork.date_to - taskInWork.date_from
+        timeDelta = taskInWork.date_to - taskInWork.date_from
+        taskInWork.timeWorked = timeDelta.total_second()
         taskInWork.save()
     
     task.description = request.POST['description']
@@ -116,7 +117,7 @@ class TaskWorkingHoursView(LoginRequiredMixin, ListView):
     model = TaskWorkingHours
     template_name = 'taskBoard/dateInWorkView.html'
 
-# class TaskWorkingHoursFilter(django_filters.FilterSet):
-#     class Meta:
-#         model = TaskWorkingHours
-#         fields = ['taskInWork']
+class TaskWorkingHoursFilter(django_filters.FilterSet):
+    class Meta:
+        model = TaskWorkingHours
+        fields = ['taskInWork']
