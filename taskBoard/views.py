@@ -13,8 +13,6 @@ from taskBoard.forms import TaskCreateForm
 from django.contrib.auth.models import User, UserManager
 from django.contrib.auth.decorators import permission_required
 
-import django_filters
-
 from .models import Task, TaskWorkingHours
 from taskBoard import models
 from taskBoard.forms import TaskCreateForm
@@ -116,8 +114,3 @@ def createTask(request):
 class TaskWorkingHoursView(LoginRequiredMixin, ListView):
     model = TaskWorkingHours
     template_name = 'taskBoard/dateInWorkView.html'
-
-# class TaskWorkingHoursFilter(django_filters.FilterSet):
-#     class Meta:
-#         model = TaskWorkingHours
-#         fields = ['taskInWork']
