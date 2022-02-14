@@ -1,4 +1,7 @@
 from django.urls import path
+from django_filters.views import FilterView
+
+from models import TaskWorkingHours
 
 from . import views
 
@@ -10,5 +13,5 @@ urlpatterns = [
     path('add', views.TaskCreate.as_view(), name='add'),
     path('CreateTask', views.createTask, name='createTask'),
     path('<int:pk>/Delete', views.TaskDelete.as_view(), name='delete'),
-    path('TaskWorkingHours', views.TaskWorkingHoursView.as_view(), name='TaskWorkingHours'),
+    path('TaskWorkingHours', FilterView.as_view(model=TaskWorkingHours), name='TaskWorkingHours'),
 ]

@@ -86,7 +86,7 @@ def detail(request, task_id):
         taskInWork = get_object_or_404(TaskWorkingHours, taskInWork=task, date_to=None)
         taskInWork.date_to = datetime.now() 
         timeDelta = taskInWork.date_to - taskInWork.date_from
-        taskInWork.timeWorked = timeDelta.total_second()
+        # taskInWork.timeWorked = timeDelta.total_second()
         taskInWork.save()
     
     task.description = request.POST['description']
