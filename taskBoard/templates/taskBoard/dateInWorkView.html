@@ -2,11 +2,12 @@
 
 {% block content %}
     <h1>Тест</h1>
-    <ul>
-        {% for item in object_list %}
-        <li>Задача: {{ item.taskInWork }} с {{ item.date_from }} по {{ item.date_to }} | {{ item.timeWorked }}</li>
-        {% endfor %}
-    </ul>
-
+    <form method="get">
+        {{ filter.form.as_p }}
+        <input type="submit" />
+    </form>
+    {% for obj in filter.qs %}
+        {{ obj.taskInWork }}: с {{ obj.date_from }} по {{ obj.date_to }}<br />
+    {% endfor %}
     
 {% endblock %}
