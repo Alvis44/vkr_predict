@@ -1,7 +1,7 @@
 from django.urls import path
-# from django_filters.views import FilterView
+from django_filters.views import FilterView
 
-# from models import TaskWorkingHours
+from models import TaskWorkingHours
 
 from . import views
 
