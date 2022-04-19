@@ -36,7 +36,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-=09!w#3dylt57v
 # DEBUG = False
 DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
 
-ALLOWED_HOSTS = ['vkr-predict-bp.herokuapp.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['vkr-predict.herokuapp.com', 'vkr-predict-bp.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
