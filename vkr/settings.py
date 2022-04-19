@@ -42,7 +42,6 @@ ALLOWED_HOSTS = ['vkr-predict-bp.herokuapp.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'taskBoard.apps.TaskboardConfig',
     'predictBP.apps.PredictBPConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -63,7 +62,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Task_list.urls'
+ROOT_URLCONF = 'vkr.urls'
 
 TEMPLATES = [
     {
@@ -81,7 +80,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Task_list.wsgi.application'
+WSGI_APPLICATION = 'vkr.wsgi.application'
 
 
 # Database
@@ -149,7 +148,6 @@ STATIC_URL = '/staticfiles/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# LOGIN_REDIRECT_URL = '/taskBoard/'
 LOGIN_REDIRECT_URL = '/'
 
 CSRF_COOKIE_SECURE = True

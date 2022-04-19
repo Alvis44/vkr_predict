@@ -13,14 +13,13 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
-    <h1 class="title">ПРЕДСКАЗАНИЕ</h1>
+    <h1 class="title">ПРЕДСКАЗАТЕЛЬ</h1>
 </head>
 
 <body>
     <div class="container-fluid">
 
-        <a href="matrix">Матрица</a>
-        <a href="modul">Модули</a>
+        <div style="font-size: 20px;"><a href="matrix" style="padding-right: 20px;">Матрица</a><a href="modul">Модули</a></div>
 
         {% block content %}{% endblock %}  
 

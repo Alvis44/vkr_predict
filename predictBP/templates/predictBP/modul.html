@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+{% load static %}
+<h2 style="padding-bottom: 20px;">Модуль упругости при растяжении, ГПа и Прочность при растяжении, МПа</h2>
+<form  method="post">
+    {% csrf_token %}
+    <div class="main" style="padding-right: 50px;">
+    <div class="field"><label for="plotnost">Соотношение матрица-наполнитель: </label><input id="matr" type="number" name="matr" value="{{ matr }}" step="0.000000001"></div>
+    <div class="field"><label for="plotnost">Плотность, кг/м3: </label><input id="plotnost" type="number" name="plotnost" value="{{ plotnost }}"></div>
+    <div class="field"><label for="modulUprugosti">Модуль упругости, ГПа: </label><input id="modulUprugosti" type="number" name="modulUprugosti" value="{{ modulUprugosti }}"></div>
+    <div class="field"><label for="poverhPlotn">Поверхностная плотность, г/м2: </label><input id="poverhPlotn" type="number" name="poverhPlotn" value="{{ poverhPlotn }}"></div>
+    <div class="field"><label for="shagNash">Шаг нашивки: </label><input id="shagNash" type="number" name="shagNash" value="{{ shagNash }}"></div>
+    <div class="field"><label for="plotNash">Плотность нашивки: </label><input id="plotNash" type="number" name="plotNash" value="{{ plotNash }}"></div>
+    <input type="submit" value="Получить прогноз">
+    </div>
+</form>
+<div style="font-size:20px;">
+    <div style="font-size:25px;"><b><text for="result">Результат</text></b></div>
+    <div><text for="resultmodulUprugostiRast">Модуль упругости при растяжении, ГПа: </text> <b><text id="resultmodulUprugostiRast" style="color: green; font-size:25px;">{{ resultmodulUprugostiRast }}</text></b></div>
+    <div><text for="resultprochnRast">Прочность при растяжении, МПа: </text> <b><text id="resultprochnRast" style="color: green; font-size:25px;">{{ resultprochnRast }}</text></b></div>
+</div>
+{% endblock %}

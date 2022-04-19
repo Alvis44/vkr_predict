@@ -20,8 +20,4 @@ from django.urls.conf import include
 
 urlpatterns = [
     path('', include('predictBP.urls'))
-    # path('', include('taskBoard.urls')),
-    # path('taskBoard/', include('taskBoard.urls')),
-    # path('admin/', admin.site.urls),
-    # path('accounts/', include('django.contrib.auth.urls')),
 ]
