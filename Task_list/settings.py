@@ -33,8 +33,8 @@ BASE_NAME = os.environ.get('BASE_NAME')
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'django-insecure-=09!w#3dylt57vd0+#0^etu^thq5q1e5q3#_u1@*xmxj1zqn(1')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-#DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
+# DEBUG = False
+DEBUG = bool(os.environ.get('DJANGO_DEBUG'))
 
 ALLOWED_HOSTS = ['task-list-alvis.herokuapp.com', 'localhost', '127.0.0.1']
 
@@ -43,6 +43,7 @@ ALLOWED_HOSTS = ['task-list-alvis.herokuapp.com', 'localhost', '127.0.0.1']
 
 INSTALLED_APPS = [
     'taskBoard.apps.TaskboardConfig',
+    'predictBP.apps.PredictBPConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -95,7 +96,7 @@ WSGI_APPLICATION = 'Task_list.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2', #django.db.backends.postgresql
         'NAME': BASE_NAME,
         'USER': BASE_USER,
         'PASSWORD': BASE_PASSWORD,
@@ -148,7 +149,8 @@ STATIC_URL = '/staticfiles/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = '/taskBoard/'
+# LOGIN_REDIRECT_URL = '/taskBoard/'
+LOGIN_REDIRECT_URL = '/'
 
 CSRF_COOKIE_SECURE = True
 
